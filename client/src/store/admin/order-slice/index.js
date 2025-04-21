@@ -6,9 +6,11 @@ const initialState = {
     orderDetails : null
 }
 
+const backendURL = import.meta.env.VITE_BACKEND_URI
+
 export const getAllOrdersForAdmin = createAsyncThunk('/order/getAllOrdersForAdmin',
     async() => {
-        const response = await axios.get(`http://localhost:8000/api/admin/orders/get`);
+        const response = await axios.get(`${backendURL}/api/admin/orders/get`);
 
         return response.data;
     }
@@ -16,14 +18,14 @@ export const getAllOrdersForAdmin = createAsyncThunk('/order/getAllOrdersForAdmi
 
 export const getOrderDetailsForAdmin = createAsyncThunk('/order/getOrderDetailsForAdmin',
     async(id) => {
-        const response = await axios.get(`http://localhost:8000/api/admin/orders/details/${id}`);
+        const response = await axios.get(`${backendURL}/api/admin/orders/details/${id}`);
         return response.data;
     }
 )
 
 export const updateOrderStatus = createAsyncThunk('/order/updateOrderStatus',
     async({id, orederStatus}) => {
-        const response = await axios.put(`http://localhost:8000/api/admin/orders/update/${id}`, {orederStatus});
+        const response = await axios.put(`${backendURL}/api/admin/orders/update/${id}`, {orederStatus});
         return response.data;
     }
 )

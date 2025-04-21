@@ -10,9 +10,11 @@ const initialState = {
     orderDetails : null
 }
 
+const backendURL = import.meta.env.VITE_BACKEND_URI
+
 export const createNewOrder = createAsyncThunk('/order/createNewOrder',
     async(orderData) => {
-        const response = await axios.post(`http://localhost:8000/api/shop/order/create`, orderData);
+        const response = await axios.post(`${backendURL}/api/shop/order/create`, orderData);
 
         return response.data;
     }
@@ -20,7 +22,7 @@ export const createNewOrder = createAsyncThunk('/order/createNewOrder',
 
 export const capturePayment = createAsyncThunk('/order/capturePayment',
     async({paymentId, payerId, orderId}) => {
-        const response = await axios.post(`http://localhost:8000/api/shop/order/capture`, 
+        const response = await axios.post(`${backendURL}/api/shop/order/capture`, 
             {
                 paymentId, payerId, orderId
             }
@@ -32,7 +34,7 @@ export const capturePayment = createAsyncThunk('/order/capturePayment',
 
 export const getAllOrdersByUser = createAsyncThunk('/order/getAllOrdersByUser',
     async(userId) => {
-        const response = await axios.get(`http://localhost:8000/api/shop/order/list/${userId}`);
+        const response = await axios.get(`${backendURL}/api/shop/order/list/${userId}`);
 
         return response.data;
     }
@@ -40,7 +42,7 @@ export const getAllOrdersByUser = createAsyncThunk('/order/getAllOrdersByUser',
 
 export const getOrderDetails = createAsyncThunk('/order/getOrderDetails',
     async(id) => {
-        const response = await axios.get(`http://localhost:8000/api/shop/order/details/${id}`);
+        const response = await axios.get(`${backendURL}/api/shop/order/details/${id}`);
         return response.data;
     }
 )

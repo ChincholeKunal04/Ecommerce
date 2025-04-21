@@ -6,9 +6,11 @@ const initialState = {
     featureImageList : []
 };
 
+const backendURL = import.meta.env.VITE_BACKEND_URI
+
 export const getFeatureImages = createAsyncThunk('/auth/getFeatureImages',
     async() => {
-        const response = await axios.get('http://localhost:8000/api/common/feature/get');
+        const response = await axios.get(`${backendURL}/api/common/feature/get`);
 
         return response.data;
     }
@@ -16,7 +18,7 @@ export const getFeatureImages = createAsyncThunk('/auth/getFeatureImages',
 
 export const addFeatureImages = createAsyncThunk('/auth/addFeatureImages',
     async(image) => {
-        const response = await axios.post('http://localhost:8000/api/common/feature/add', 
+        const response = await axios.post(`${backendURL}/api/common/feature/add`, 
             {image}
 
         );

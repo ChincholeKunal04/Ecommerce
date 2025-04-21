@@ -7,6 +7,8 @@ const initialState = {
     productDetails : null
 }
 
+const backendURL = import.meta.env.VITE_BACKEND_URI
+
 export const fetchAllFilteredProducts = createAsyncThunk('/products/fetchAllFilteredProducts',
     async({filterParams, sortParams}) => {
         const query = new URLSearchParams({
@@ -15,7 +17,7 @@ export const fetchAllFilteredProducts = createAsyncThunk('/products/fetchAllFilt
         });
 
         const result = await axios.get(
-            `http://localhost:8000/api/shop/products/get?${query}`
+            `${backendURL}/api/shop/products/get?${query}`
         );
 
         return result?.data;
@@ -25,7 +27,7 @@ export const fetchAllFilteredProducts = createAsyncThunk('/products/fetchAllFilt
 export const fetchProductDetails = createAsyncThunk('/products/fetchProductDetails',
     async(id) => {
         const result = await axios.get(
-            `http://localhost:8000/api/shop/products/get/${id}`
+            `${backendURL}/api/shop/products/get/${id}`
         );
 
         return result?.data;

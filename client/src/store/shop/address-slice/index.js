@@ -6,30 +6,32 @@ const initialState = {
     addressList : []
 }
 
+const backendURL = import.meta.env.VITE_BACKEND_URI
+
 export const addNewAddress = createAsyncThunk('/addresses/addNewAddress', 
     async(formData) => {
-        const response = await axios.post(`http://localhost:8000/api/shop/address/add`, formData);
+        const response = await axios.post(`${backendURL}/api/shop/address/add`, formData);
         return response?.data;
     }
 )
 
 export const fetchAllAddresses = createAsyncThunk('/addresses/fetchAllAddresses', 
     async(userId) => {
-        const response = await axios.get(`http://localhost:8000/api/shop/address/get/${userId}`);
+        const response = await axios.get(`${backendURL}/api/shop/address/get/${userId}`);
         return response?.data;
     }
 )
 
 export const editAddress = createAsyncThunk('/addresses/editAddress', 
     async({userId, addressId, formData}) => {
-        const response = await axios.put(`http://localhost:8000/api/shop/address/update/${userId}/${addressId}`, formData);
+        const response = await axios.put(`${backendURL}/api/shop/address/update/${userId}/${addressId}`, formData);
         return response?.data;
     }
 )
 
 export const deleteAddress = createAsyncThunk('/addresses/deleteAddress', 
     async({userId, addressId}) => {
-        const response = await axios.delete(`http://localhost:8000/api/shop/address/delete/${userId}/${addressId}`);
+        const response = await axios.delete(`${backendURL}/api/shop/address/delete/${userId}/${addressId}`);
         return response?.data;
     }
 )

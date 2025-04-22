@@ -50,11 +50,13 @@ const ImageUpload = ({
         }
     }
 
+    const backendURL = import.meta.env.VITE_BACKEND_URI
+
     async function uploadImageToCloudinary() {
         setImageLoadingState(true)
         const data = new FormData();
         data.append('my_file', imageFile)
-        const response = await axios.post('backendURL/api/admin/products/upload-image', data)
+        const response = await axios.post(`${backendURL}/api/admin/products/upload-image`, data)
 
         console.log(response.data);
         if(response.data?.success) {

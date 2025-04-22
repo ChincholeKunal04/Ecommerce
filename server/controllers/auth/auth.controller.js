@@ -65,7 +65,14 @@ const loginUser = async(req, res) => {
             userName : checkUser.userName 
         }, 'CLIENT_SECRET_KEY', {expiresIn : '12h'})
 
-        res.cookie('token', token, { httpOnly : true, secure : false});
+        res.cookie('token', token, 
+            { 
+                httpOnly : true, 
+                secure : true,
+                sameSite : 'None',
+                maxAge: 24 * 60 * 60 * 1000
+            }
+        );
         res.json({
             success : true,
             message : "Login Successfully",
